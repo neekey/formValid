@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=cp936"/>
+		<title>formValid</title>
+		<script language="javascript" type="text/javascript" src="http://a.tbcdn.cn/??s/kissy/1.1.6/kissy-min.js"></script>
+		<script language="javascript" type="text/javascript" src="../formValid.js"></script>
+	</head>
+	<body>
+		<form action="action" method="GET" id="formValid" accept-charset="cp936" enctype="multipart/form-data">
+			<p><label for="require">required:</label><input type="text" name="input1" class="required" /><span id="input1-required"></span></p>
+			<p><label for="require">email:</label><input type="text" name="input2" class="email" /><span id="input2-email"></span></p>
+			<p><label for="require">phone:</label><input type="text" name="input3" class="phone" /><span id="input3-phone"></span></p>
+			<p><label for="require">max10&min5:</label><input type="text" name="input4" class="max10 min5" /><span id="input4-max10"></span><span id="input4-min5"></span></p>
+			<p><label for="require">match1:</label><input type="text" name="input5" id="match-target"  /></p>
+			<p><label for="require">match2:</label><input type="text" name="input6" match="match-target"  class="match" /><span id="input6-match"></span></p>
+			<p><label for="require">required:</label>
+				<select class="required" name="select1">
+					<option value=""></option>
+					<option value="boy">boy</option>
+					<option value="girl">girl</option>
+				</select>
+				<span id="select1-required"></span>
+			</p>
+			<p><label for="require">required&max20:</label><textarea name="textarea1" class="required max20"></textarea><span id="textarea1-max20"></span><span id="textarea1-required"></span></p>
+			<p><input type="submit"  value="submit"/></p>
+			<p><a href="#" id="check">check</a></p>
+			<p><a href="#" id="submit_check">submit width check</a></p>
+			<p><a href="#" id="submit">submit widthout check</a></p>
+		</form>
+		<script language="javascript" type="text/javascript">
+			var K = KISSY;
+			var formValid = new KISSY.formValid( 'formValid', function( result, elem, rule, msg ){
+				var alert = K.one( '#' + elem.name + '-' + rule );
+				if( alert[ 0 ] ){
+					if( result ){
+						alert.hide();
+					}
+					else {
+						alert.html( msg );
+						alert.show();
+					}
+				}
+			});
+		
+			K.one( '#check' ).on( 'click', function(){
+				formValid.check();
+				return false;
+			});
+			K.one( '#submit' ).on( 'click', function(){
+				formValid.submit( false );
+				return false;
+			});
+			K.one( '#submit_check' ).on( 'click', function(){
+				formValid.submit();
+				return false;
+			});
+		</script>
+	</body>
+</html>
